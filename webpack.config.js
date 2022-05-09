@@ -49,14 +49,7 @@ module.exports = {
                 "css-loader",
                 // Compiles Sass to CSS
                 "sass-loader",
-                {
-                    loader: 'sass-resources-loader',
-                    options: {
-                        resources: [
-                            './src/main.scss',
-                        ]
-                    }
-                }
+                
             ],
         },
         ],

@@ -1,5 +1,6 @@
 const Keyboard = {
     elements: {
+        textContent: null,
         main: null,
         keysContainer: null,
         keys: []
@@ -17,12 +18,14 @@ const Keyboard = {
 
     init() {
         // Create main elements
+        this.elements.textContent = document.createElement("textarea");
         this.elements.main = document.createElement("div");
         this.elements.keysContainer = document.createElement("div");
 
         // Setup main elements
         this.elements.main.classList.add("keyboard", "1keyboard--hidden");
         this.elements.keysContainer.classList.add("keyboard__keys");
+        this.elements.textContent.classList.add("text__content");
         this.elements.keysContainer.appendChild(this._createKeys());
 
         this.elements.keys = this.elements.keysContainer.querySelectorAll(".keyboard__key");
@@ -30,9 +33,10 @@ const Keyboard = {
         // Add to DOM
         this.elements.main.appendChild(this.elements.keysContainer);
         document.body.appendChild(this.elements.main);
+        document.body.appendChild(this.elements.textContent);
 
         // Automatically use keyboard for elements with .use-keyboard-input
-        document.querySelectorAll(".use-keyboard-input").forEach(element => {
+        document.querySelectorAll(".text__content").forEach(element => {
             element.addEventListener("focus", () => {
                 this.open(element.value, currentValue => {
                     element.value = currentValue;
@@ -161,14 +165,14 @@ const Keyboard = {
         this.properties.value = initialValue || "";
         this.eventHandlers.oninput = oninput;
         this.eventHandlers.onclose = onclose;
-        this.elements.main.classList.remove("keyboard--hidden");
+        this.elements.main.classList.remove("keyboard--1hidden");
     },
 
     close() {
         this.properties.value = "";
         this.eventHandlers.oninput = oninput;
         this.eventHandlers.onclose = onclose;
-        this.elements.main.classList.add("keyboard--hidden");
+        this.elements.main.classList.add("keyboard--1hidden");
     }
 };
 
